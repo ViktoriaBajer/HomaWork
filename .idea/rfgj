@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in); // Считываем ввод с консоли
+        try {
+            String input = in.nextLine(); // Читаем строку
+            System.out.println(calc(input)); // Печатаем результат
+        } catch (Exception e) {
+            System.out.println("throws Exception"); // В случае ошибки
+        }
+    }
+
+        public static String calc(String input) throws Exception {
+            String[] parts = input.trim().split(" ");
+            if (parts.length != 3) {
+                throw new Exception("Неверный формат выражения");
+        }
+
+        int a, b;
+        String operator = parts[1];
+
+        try {
+            a = Integer.parseInt(parts[0]);
+            b = Integer.parseInt(parts[2]);
+        } catch (NumberFormatException e) {
+            throw new Exception("Операнды должны быть целыми числами");
+        }
+
+        if (a < 1 || a > 10 || b < 1 || b > 10) {
+            throw new Exception("Операнды должны быть от 1 до 10 включительно");
+        }
+
+        int result;
+        switch (operator) {
+            case "+":
+                result = a + b;
+                break;
+            case "-":
+                result = a - b;
+                break;
+            case "*":
+                result = a * b;
+                break;
+            case "/":
+                result = a / b;
+                break;
+            default:
+                throw new Exception("Неверный оператор");
+        }
+
+        return String.valueOf(result);
+    }
+}
